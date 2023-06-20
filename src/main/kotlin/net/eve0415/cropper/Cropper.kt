@@ -5,7 +5,7 @@ import com.github.shynixn.mccoroutine.bukkit.registerSuspendingEvents
 
 @Suppress("unused")
 class Cropper : SuspendingJavaPlugin() {
-    override fun onEnable() {
+    override suspend fun onEnableAsync() {
         server.pluginManager.registerSuspendingEvents(CropperEventListener(this), this)
         logger.info("Cropper has been enabled!")
     }

@@ -1,7 +1,10 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
+
 val ktlint: Configuration by configurations.creating
 
 plugins {
-    kotlin("jvm") version "1.7.20"
+    kotlin("jvm") version "1.8.22"
 }
 
 group = "net.eve0415"
@@ -16,21 +19,44 @@ repositories {
 }
 
 dependencies {
-    compileOnly("io.papermc.paper:paper-api:1.19.2-R0.1-SNAPSHOT")
-    implementation("com.github.shynixn.mccoroutine:mccoroutine-bukkit-api:2.6.0")
-    implementation("com.github.shynixn.mccoroutine:mccoroutine-bukkit-core:2.6.0")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
+    compileOnly("io.papermc.paper:paper-api:1.20-R0.1-SNAPSHOT")
+    implementation("com.github.shynixn.mccoroutine:mccoroutine-bukkit-api:2.12.1")
+    implementation("com.github.shynixn.mccoroutine:mccoroutine-bukkit-core:2.12.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1")
 
-    ktlint("com.pinterest:ktlint:0.47.1")
+    ktlint("com.pinterest:ktlint:0.49.1")
 }
 
 kotlin {
-    jvmToolchain {
-        languageVersion.set(JavaLanguageVersion.of(17))
+    jvmToolchain(17)
+    sourceSets.all {
+        languageSettings {
+            languageVersion = "2.0"
+        }
     }
 }
 
 tasks {
+    compileKotlin {
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_17)
+            apiVersion.set(KotlinVersion.KOTLIN_1_8)
+            languageVersion.set(KotlinVersion.KOTLIN_1_8)
+        }
+    }
+
+    compileTestKotlin {
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_17)
+            apiVersion.set(KotlinVersion.KOTLIN_1_8)
+            languageVersion.set(KotlinVersion.KOTLIN_1_8)
+        }
+    }
+
+    withType<JavaCompile>().configureEach {
+        options.encoding = "UTF-8"
+    }
+    
     processResources {
         inputs.property("version", project.version)
         from(sourceSets.main.get().resources.srcDirs) {

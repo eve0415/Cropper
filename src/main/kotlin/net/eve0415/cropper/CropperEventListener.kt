@@ -59,12 +59,13 @@ class CropperEventListener(private val plugin: Cropper) : Listener {
 
         if (blockData is Leaves) {
             if (blockData.isPersistent) return
-
-            for (i in (blockData.distance * -1)..blockData.distance) {
-                for (j in (blockData.distance * -1)..blockData.distance) {
-                    for (k in (blockData.distance * -1)..blockData.distance) {
-                        if (isLog(world.getBlockAt(block.location.add(i.toDouble(), j.toDouble(), k.toDouble())))) {
-                            return
+            if (blockData.distance < 7) {
+                for (i in (blockData.distance * -1)..blockData.distance) {
+                    for (j in (blockData.distance * -1)..blockData.distance) {
+                        for (k in (blockData.distance * -1)..blockData.distance) {
+                            if (isLog(world.getBlockAt(block.location.add(i.toDouble(), j.toDouble(), k.toDouble())))) {
+                                return
+                            }
                         }
                     }
                 }
