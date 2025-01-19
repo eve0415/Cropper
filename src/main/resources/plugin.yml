@@ -1,11 +1,11 @@
 name: Cropper
 version: '${version}'
 main: net.eve0415.cropper.Cropper
-api-version: 1.20
+api-version: 1.21
 authors: [ eve0415 ]
 description: Add some useful system for crops and trees
 website: https://github.com/eve0415/cropper
 libraries:
-  - org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1
-  - com.github.shynixn.mccoroutine:mccoroutine-bukkit-api:2.12.1
-  - com.github.shynixn.mccoroutine:mccoroutine-bukkit-core:2.12.1
+  - org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.1
+  - com.github.shynixn.mccoroutine:mccoroutine-bukkit-api:2.20.0
+  - com.github.shynixn.mccoroutine:mccoroutine-bukkit-core:2.20.0
